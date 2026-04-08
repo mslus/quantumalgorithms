@@ -4,12 +4,9 @@ import random
 def create_random_state(randX, randY):
 
   q = cirq.LineQubit(0)
-
   circuit = cirq.Circuit([cirq.X(q)**randX, cirq.Y(q)**randY])
-
   sim = cirq.Simulator().simulate(circuit)
-  return sim.final_state_vector;
-
+  return sim
 
 def create_circuit(randX, randY):
   msg, alice, bob = cirq.LineQubit.range(3)
@@ -21,15 +18,16 @@ def create_circuit(randX, randY):
   # Create state that will be sent to Bob
   circuit.append([cirq.X(msg)**randX, cirq.Y(msg)**randY])
 
+  # Process and measure the message and Alice's qubit
   circuit.append(cirq.CNOT(msg, alice))
   circuit.append(cirq.H(msg))
   circuit.append(cirq.measure(msg, alice))
 
+  # Apply controlled X and Z gates on Bob's pair of entangled qubit
   circuit.append(cirq.CNOT(alice, bob))
   circuit.append(cirq.CZ(msg, bob))
 
   sim = cirq.Simulator().simulate(circuit, qubit_order=[msg, alice, bob])
-
   return sim
 
 
@@ -43,8 +41,6 @@ if __name__ == '__main__':
 
   print("Initial state:")
   print(initial_state)
+  print("====================")
   print("Final state:")
   print(final_state)
-
-
-
