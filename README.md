@@ -1,1 +1,1 @@
-Collection of canonical quantum algorithms implemented in cirq
+Collection of canonical quantum algorithms implemented in cirq as an exercise.
