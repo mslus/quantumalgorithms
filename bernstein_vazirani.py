@@ -63,6 +63,7 @@ def run_bv(n, secret_s, secret_b=0):
     print(f"Secret bitstring (s): {secret_s}")
     print(f"Secret bias (b):      {secret_b}")
     print(f"Measured bitstring:   {list(measured_bits)}")
+    print(circuit)
     
     success = list(measured_bits) == secret_s
     print(f"Success: {success}\n")
